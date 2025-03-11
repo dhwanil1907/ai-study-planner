@@ -1,4 +1,4 @@
-# AI Study Planner
+# AI Study Planner 📚
 
 A web application designed to help students create and manage personalized study plans using reinforcement learning (RL) and natural language processing (NLP). The application also integrates with Google Calendar for scheduling and includes user authentication features like login and registration.
 
