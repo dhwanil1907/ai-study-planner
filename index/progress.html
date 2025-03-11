@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Progress{% endblock %}
+{% block content %}
+<div class="max-w-2xl mx-auto bg-white p-6 rounded-lg shadow-md">
+    <h2 class="text-2xl font-bold mb-4 text-center">Track Your Progress</h2>
+    {% for day in schedule %}
+    <div class="mb-4">
+        <h3 class="text-lg font-semibold">{{ day.date }}</h3>
+        <ul>
+            {% for item in day.schedule %}
+            {% set progress_entry = progress_data | selectattr('date', 'equalto', day.date) | selectattr('task', 'equalto', item.time + ': ' + item.subject + ' (' + item.duration|string + ' hours)') | first %}
+            <li class="flex items-center justify-between py-2">
+                <span>{{ item.time }}: {{ item.subject }} ({{ item.duration }} hours)</span>
+                <form method="POST">
+                    <input type="hidden" name="task_id" value="{{ progress_entry.id if progress_entry else '' }}">
+                    <input type="checkbox" name="completed" {% if progress_entry and progress_entry.completed %}checked{% endif %} onchange="this.form.submit()">
+                </form>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

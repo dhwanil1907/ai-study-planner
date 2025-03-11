@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block content %}
+<div class="max-w-2xl mx-auto bg-white p-6 rounded-lg shadow-md">
+    <h2 class="text-2xl font-bold mb-4 text-center">Create Your Study Plan</h2>
+    <form id="study-form">
+        <div class="mb-4">
+            <label for="subjects" class="block text-gray-700">Subjects/Topics (comma separated):</label>
+            <input type="text" id="subjects" class="w-full p-2 border rounded" placeholder="e.g., Math, Physics, History">
+        </div>
+        <div class="mb-4">
+            <label for="deadline" class="block text-gray-700">Deadline:</label>
+            <input type="date" id="deadline" class="w-full p-2 border rounded">
+        </div>
+        <div class="mb-4">
+            <label for="hours" class="block text-gray-700">Available Hours per Day:</label>
+            <input type="number" id="hours" min="1" max="24" class="w-full p-2 border rounded" placeholder="e.g., 4">
+        </div>
+        <button type="submit" class="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700">Generate Study Plan</button>
+    </form>
+</div>
+
+<div id="result" class="mt-6"></div>
+
+{% if plans %}
+<div class="mt-6">
+    <h3 class="text-xl font-bold mb-4">Your Saved Plans</h3>
+    {% for plan in plans %}
+    <div class="bg-white p-4 rounded-lg shadow-md mb-4">
+        <p><strong>Subjects:</strong> {{ plan.subjects }}</p>
+        <p><strong>Deadline:</strong> {{ plan.deadline.strftime('%Y-%m-%d') }}</p>
+        <p><strong>Hours/Day:</strong> {{ plan.hours_per_day }}</p>
+        <a href="{{ url_for('progress', plan_id=plan.id) }}" class="text-blue-600 hover:underline">View Progress</a>
+        <a href="{{ url_for('sync_calendar', plan_id=plan.id) }}" class="text-blue-600 hover:underline ml-4">Sync with Google Calendar</a>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+{% endblock %}
