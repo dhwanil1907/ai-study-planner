@@ -1,7 +1,3 @@
-Below is a well-structured GitHub README for your project, including details about the login and register functionality, as well as other features you've implemented. It also includes sections for installation, usage, features, technologies used, and more.
-
----
-
 # AI Study Planner
 
 A web application designed to help students create and manage personalized study plans using reinforcement learning (RL) and natural language processing (NLP). The application also integrates with Google Calendar for scheduling and includes user authentication features like login and registration.
